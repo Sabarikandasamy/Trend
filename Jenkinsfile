@@ -24,10 +24,8 @@ pipeline {
                 )]) {
                     sh '''
                         docker login -u $DOCKER_USER -p $DOCKER_PASS
-                        docker buildx build \
-                          --platform linux/amd64,linux/arm64 \
-                          -t $DOCKER_IMAGE \
-                          --push .
+                        docker build -t $DOCKER_IMAGE .
+                        docker push $DOCKER_IMAGE
                     '''
                 }
             }
